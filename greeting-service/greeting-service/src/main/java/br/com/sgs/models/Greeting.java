@@ -1,4 +1,4 @@
-package br.com.sgs;
+package br.com.sgs.models;
 
 public class Greeting {
 	
