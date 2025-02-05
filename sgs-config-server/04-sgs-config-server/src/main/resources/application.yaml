@@ -5,3 +5,10 @@ spring:
     name: sgs-config-server
   profiles:
     active: native
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/sanziocarmo/sgs-config-server
+          default-label: main
+          search-paths: 'greeting-service*'
