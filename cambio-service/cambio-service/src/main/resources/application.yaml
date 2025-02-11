@@ -1,0 +1,15 @@
+server:
+  port: 8000
+  spring:
+    application:
+      name: cambio-service
+    config:
+      import: optional:configserver:http://localhost:8888/
+      cloud:
+        config:
+          profile: prod
+    management:
+      endpoints:
+        web:
+          exposure:
+            include: "*"
