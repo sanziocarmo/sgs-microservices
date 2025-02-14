@@ -1,15 +1,39 @@
 server:
   port: 8000
-  spring:
-    application:
-      name: cambio-service
-    config:
-      import: optional:configserver:http://localhost:8888/
-      cloud:
-        config:
-          profile: prod
-    management:
-      endpoints:
-        web:
-          exposure:
-            include: "*"
+
+spring:
+  application:
+    name: cambio-service
+
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/cambio_service?useTimezone=true&serverTimezone=UTC
+    username: sgs
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10
+
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
+
+  flyway:
+    enabled: true
+    url: jdbc:mysql://127.0.0.1:3306/cambio_service
+    schemas: cambio_service
+    user: sgs
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+#    config:
+#      import: optional:configserver:http://localhost:8888/
+#      cloud:
+#        config:
+#          profile: prod
+#    management:
+#      endpoints:
+#        web:
+#          exposure:
+#            include: "*"
