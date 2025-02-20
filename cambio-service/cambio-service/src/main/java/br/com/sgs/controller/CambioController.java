@@ -1,7 +1,6 @@
 package br.com.sgs.controller;
 
 import br.com.sgs.dto.CambioResponse;
-import br.com.sgs.model.Cambio;
 import br.com.sgs.repository.CambioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
