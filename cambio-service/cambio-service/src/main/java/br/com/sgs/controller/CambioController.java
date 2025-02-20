@@ -1,5 +1,6 @@
 package br.com.sgs.controller;
 
+import br.com.sgs.dto.CambioResponse;
 import br.com.sgs.model.Cambio;
 import br.com.sgs.repository.CambioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class CambioController {
     private CambioRepository cambioRepository;
 
     @GetMapping(value = "/{amount}/{from}/{to}")
-    public Cambio getCambio(
+    public CambioResponse getCambio(
             @PathVariable("amount") BigDecimal amount,
             @PathVariable("from") String from,
             @PathVariable("to") String to
@@ -40,6 +41,13 @@ public class CambioController {
         cambio.setConvertedValue(conversionValue.setScale(2, RoundingMode.CEILING));
         cambio.setEnvironment(port);
 
-        return cambio;
+        return new CambioResponse(
+                cambio.getId(),
+                cambio.getFrom(),
+                cambio.getTo(),
+                cambio.getConversionFactor(),
+                conversionValue,
+                port
+        );
     }
 }

@@ -1,0 +1,44 @@
+server:
+  port: 8100
+
+spring:
+  application:
+    name: book-service
+
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/book_service?useTimezone=true&serverTimezone=UTC
+    username: sgs
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10
+
+  jackson:
+    default-property-inclusion: NON_NULL
+    serialization:
+      fail-on-empty-beans: false
+
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
+
+  flyway:
+    enabled: true
+    url: jdbc:mysql://127.0.0.1:3306/book_service
+    schemas: book_service
+    user: sgs
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+#    config:
+#      import: optional:configserver:http://localhost:8888/
+#      cloud:
+#        config:
+#          profile: prod
+#    management:
+#      endpoints:
+#        web:
+#          exposure:
+#            include: "*"
