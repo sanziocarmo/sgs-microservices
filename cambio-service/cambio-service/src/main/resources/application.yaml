@@ -12,6 +12,12 @@ spring:
   application:
     name: cambio-service
 
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/cambio_service?useTimezone=true&serverTimezone=UTC
     username: sgs
