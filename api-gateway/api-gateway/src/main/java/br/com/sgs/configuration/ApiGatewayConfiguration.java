@@ -1,32 +1,34 @@
 package br.com.sgs.configuration;
 
-import org.springframework.cloud.gateway.route.Route;
-import org.springframework.cloud.gateway.route.RouteLocator;
-import org.springframework.cloud.gateway.route.builder.Buildable;
-import org.springframework.cloud.gateway.route.builder.PredicateSpec;
-import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
+import org.springdoc.core.GroupedOpenApi;
+import org.springframework.cloud.gateway.route.RouteDefinitionLocator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 
-import java.util.function.Function;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Configuration
 public class ApiGatewayConfiguration {
 
     @Bean
-    public RouteLocator gatewayRouter(RouteLocatorBuilder builder) {
+    @Lazy(false)
+    public List<GroupedOpenApi> apis(RouteDefinitionLocator locator) {
+        // Obter as definições de rotas
+        var definitions = locator.getRouteDefinitions().collectList().block();
 
-        return builder.routes()
-                .route(r -> r.path("/get")
-                        .filters(f -> f
-                                .addRequestHeader("Hello", "World")
-                                .addRequestParameter("Hello", "World"))
-                .uri("http://httpbin.org:80"))
-                .route(r -> r.path("/cambio-service/**")
-                        .uri("lb://cambio-service"))
-                .route(r -> r.path("/book-service/**")
-                        .uri("lb://book-service"))
-                .build();
+        // Criar um grupo de OpenAPI para cada serviço que tenha "-service" no nome
+        return definitions.stream()
+                .filter(routeDefinition -> routeDefinition.getId().matches(".*-service"))
+                .map(routeDefinition -> {
+                    String name = routeDefinition.getId();
+                    // Criar o GroupedOpenApi para cada grupo de API
+                    return GroupedOpenApi.builder()
+                            .group(name) // Nome do grupo
+                            .pathsToMatch("/" + name + "/**") // Caminhos correspondentes
+                            .build();
+                })
+                .collect(Collectors.toList());
     }
-
 }

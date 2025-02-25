@@ -1,9 +1,10 @@
 package br.com.sgs.controller;
 
 import br.com.sgs.dto.BookDTO;
-import br.com.sgs.model.Book;
 import br.com.sgs.proxy.CambioProxy;
 import br.com.sgs.repository.BookRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -12,9 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
+@Tag(name = "Book Endpoint")
 @RestController
 @RequestMapping("/book-service")
 public class BookController {
@@ -28,6 +27,7 @@ public class BookController {
     @Autowired
     private CambioProxy cambioProxy;
 
+    @Operation(summary = "Find a specific book by your ID and currency")
     @GetMapping(value = "/{id}/{currency}")
     @Transactional
     public BookDTO findbook(

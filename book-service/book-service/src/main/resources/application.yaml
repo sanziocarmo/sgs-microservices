@@ -8,6 +8,77 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
 
+resilience4j:
+  bulkhead:
+    instances:
+      default:
+        maxConcurrentCalls: 10
+#        maxWaitDuration: 10s
+#        timeoutDuration: 10s
+
+  ratelimiter:
+    instances:
+      default:
+        limitForPeriod: 2
+        limitRefreshPeriod: 10s
+#        timeoutDuration: 10s
+#        enable-exponential-backoff: true
+
+  retry:
+    instances:
+      foo-bar:
+        max-attempts: 5
+        waitDuration: 1s
+        enable-exponential-backoff: true
+#        retryExceptions:
+#          - java.io.IOException
+#          - java.util.concurrent.TimeoutException
+#        ignoreExceptions:
+#          - java.lang.RuntimeException
+#          - java.lang.IllegalArgumentException
+#        retryOnResult:
+#          - result: 404
+#            retryExceptions:
+#              - java.io.IOException
+#          - result: 500
+#            retryExceptions:
+#              - java.io.IOException
+#        retryOnException:
+#          - exception: java.io.IOException
+#            retryExceptions:
+#              - java.util.concurrent.TimeoutException
+#          - exception: java.util.concurrent.TimeoutException
+#            retryExceptions:
+#              - java.io.IOException
+
+#  circuitbreaker:
+#    instances:
+#      default:
+#        registerHealthIndicator: true
+#        slidingWindowSize: 10
+#        minimumNumberOfCalls: 5
+#        permittedNumberOfCallsInHalfOpenState: 3
+#        automaticTransitionFromOpenToHalfOpenEnabled: true
+#        waitDurationInOpenState: 5s
+#        failureRateThreshold: 50
+#        eventConsumerBufferSize: 10
+#        recordExceptions:
+#          - java.lang.RuntimeException
+#        ignoreExceptions:
+#          - java.lang.IllegalArgumentException
+#          - java.lang.IllegalStateException
+#        recordFailurePredicate: (exception) -> true
+#        recordExceptionsWithStackTrace: 0
+#        recordFailureWithStackTrace: 0
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui
+
 spring:
   application:
     name: book-service
@@ -55,3 +126,4 @@ spring:
 #        web:
 #          exposure:
 #            include: "*"
+
