@@ -16,7 +16,7 @@ public class FooBarController {
 
     private Logger logger = org.slf4j.LoggerFactory.getLogger(FooBarController.class);
 
-    @Operation(summary = "Find a specific book by your ID and currency")
+    @Operation(summary = "Find a specific book by your Foo-bar and currency")
     @GetMapping("/foo-bar")
 //    @Retry(name = "foo-bar", fallbackMethod = "fooBarFallback")
 //    @CircuitBreaker(name = "default", fallbackMethod = "fooBarFallback")
