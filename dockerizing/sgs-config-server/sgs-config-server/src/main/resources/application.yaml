@@ -1,0 +1,12 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: sgs-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/sanziocarmo/sgs-config-server
+          default-label: main
+          search-paths: 'greeting-service*'

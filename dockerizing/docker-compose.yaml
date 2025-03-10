@@ -1,0 +1,17 @@
+version: '3.4'
+services:
+  naming-server:
+    image: socarmo/naming-server:0.0.1-SNAPSHOT
+    ports:
+      - "8761:8761"
+    networks:
+      - socarmo-network
+  zipkin:
+    image: openzipkin/zipkin:2.23.2
+    ports:
+      - "9411:9411"
+    networks:
+      - socarmo-network
+networks:
+  socarmo-network:
+    driver: bridge
