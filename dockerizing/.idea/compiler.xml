@@ -7,12 +7,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="api-gateway" />
-        <module name="sgs-config-server" />
         <module name="book-service" />
         <module name="cambio-service" />
         <module name="naming-server" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="sgs-config-server" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
