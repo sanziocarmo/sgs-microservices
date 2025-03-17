@@ -30,8 +30,7 @@ spring:
     open-in-view: false
   flyway:
     enabled: true
-    url: jdbc:mysql://127.0.0.1:3306/cambio_service
-    schemas: cambio_service
+    url: jdbc:mysql://127.0.0.1:3306/cambio_service?useTimezone=true&serverTimezone=UTC
     user: sgs
     locations: classpath:db/migration
     baseline-on-migrate: true

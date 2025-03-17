@@ -27,8 +27,7 @@ spring:
     open-in-view: false
   flyway:
     enabled: true
-    url: jdbc:mysql://127.0.0.1:3306/book_service
-    schemas: book_service
+    url: jdbc:mysql://127.0.0.1:3306/book_service?useTimezone=true&serverTimezone=UTC
     user: sgs
     locations: classpath:db/migration
     baseline-on-migrate: true
