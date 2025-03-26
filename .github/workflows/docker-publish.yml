@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-java@v4.7.0
         with:
           java-version: 17
-          distribution: 'OpenJDK 64-Bit Server VM'
+          distribution: 'Oracle Corporation'
             
       - name: Build Eureka Naming Server Container Image
         working-directory: ./Dockerizing/naming-server/naming-server
