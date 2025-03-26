@@ -22,23 +22,23 @@ jobs:
           java-version: '17'
             
       - name: Build Eureka Naming Server Container Image
-        working-directory: ./Dockerizing/naming-server/naming-server
+        working-directory: ./dockerizing/naming-server/naming-server
         run: mvn spring-boot:build-image -DskipTests
 
       - name: Build API Gateway Container Image
-        working-directory: ./Dockerizing/api-gateway/api-gateway
+        working-directory: ./dockerizing/api-gateway/api-gateway
         run: mvn spring-boot:build-image -DskipTests
 
       - name: Build Cambio Microservice Jar
-        working-directory: ./Dockerizing/cambio-service/cambio-service
+        working-directory: ./dockerizing/cambio-service/cambio-service
         run: mvn clean package -DskipTests
 
       - name: Build Book Microservice Jar
-        working-directory: ./Dockerizing/book-service/book-service
+        working-directory: ./dockerizing/book-service/book-service
         run: mvn clean package -DskipTests
         
       - name: Docker Compose Build
-        working-directory: ./Dockerizing
+        working-directory: ./dockerizing
         run: docker-compose build
 
       - name: Push to Docker Hub Container Registry
