@@ -15,11 +15,11 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           
-      - name: Setup Java JDK
-        uses: actions/setup-java@v17.0.2
+      - name: Configurar Java 17
+        uses: actions/setup-java@v3
         with:
-          java-version: 17
-          distribution: 'OpenJDK'
+          distribution: 'temurin'  # Eclipse Adoptium (ex-AdoptOpenJDK)
+          java-version: '17'
             
       - name: Build Eureka Naming Server Container Image
         working-directory: ./Dockerizing/naming-server/naming-server
