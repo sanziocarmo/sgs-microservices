@@ -29,14 +29,14 @@ jobs:
         working-directory: ./dockerizing/api-gateway/api-gateway
         run: mvn spring-boot:build-image -DskipTests
 
-      - name: Build Cambio Microservice Jar
-        working-directory: ./dockerizing/cambio-service/cambio-service
-        run: mvn clean package -DskipTests
+      - name: Build Cambio Service Docker Image
+        run: | 
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/cambio-service:latest ./dockerizing/cambio-service/cambio-service
 
-      - name: Build Book Microservice Jar
-        working-directory: ./dockerizing/book-service/book-service
-        run: mvn clean package -DskipTests
-        
+      - name: Build Book Service Docker Image
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/book-service:latest ./dockerizing/book-service/book-service
+
       - name: Docker Compose Build
         working-directory: ./dockerizing
         run: docker compose build
